@@ -3,29 +3,27 @@ import asyncHandler from "express-async-handler"
 import generateToken from "../config/generateToken.js"
 import User from "../Models/userModel.js";
 
-
 const allUsers = asyncHandler(async (req, res) => {
-  const keyword = req.query.search
-    ? {
-        $or: [
-          { name: { $regex: req.query.search, $options: "i" } },
-          { email: { $regex: req.query.search, $options: "i" } },
+  const keyword = req.query.search ? { $or: [ { name: { $regex: req.query.search, $options: "i" } }, { email: { $regex: req.query.search, $options: "i" } },
         ],
       }
     : {};
 
-  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  const users = await User.find(keyword);
   res.send(users);
 });
 
 
+
+
+//@description     Register new user
+//@route           POST /api/user/
+//@access          Public
 const registerUser = asyncHandler(async (req, res) => {
- 
   const { name, email, password, pic } = req.body;
 
   if (!name || !email || !password) {
     res.status(400);
-      console.log("aihufdasfaskdf")
     throw new Error("Please Enter all the Feilds");
   }
 

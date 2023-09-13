@@ -1,9 +1,8 @@
-
-import './App.css';
-import { Button } from '@chakra-ui/react';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
-import Homepage from './Pages/Homepage';
-import Chatpage from './Pages/Chatpage';
+import Homepage from './components/Pages/Homepage';
+import Chatpage from './components/Pages/Chatpage';
+import './App.css';
+
 function App() {
   return (
     <div className="App">
